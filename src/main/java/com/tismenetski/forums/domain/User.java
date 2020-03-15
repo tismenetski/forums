@@ -1,52 +1,59 @@
 package com.tismenetski.forums.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tismenetski.forums.domain.security.Authority;
+import com.tismenetski.forums.domain.security.UserRole;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="user_id",nullable = false,updatable = false) //@Column add attributes to a column
     private Long id;
-    @Column(name="userName",nullable = false,unique = true) //@Column add attributes to a column
-    private String userName;
+
+
+    @Column(name="username",nullable = false,unique = true) //@Column add attributes to a column
+    private String username;
 
     @Column(name="email",nullable = false ,unique = true)
     private String userEmail;
 
+    @Column(name="password",nullable = false)
+    private String userPassword;
+
     private Date userRegistrationDate;
-    private boolean userIsBanned;
     private Long userThreadsNum;
     private Long userCommentsNum;
-    //private Byte[] userImage;
+
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Comment> userComments;
+
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Thread> userThreads;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles=new HashSet<>();
 
-    public User(String userName, String userEmail, Date userRegistrationDate, boolean userIsBanned, Long userThreadsNum, Long userCommentsNum, List<Comment> userComments, List<Thread> userThreads) {
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userRegistrationDate = userRegistrationDate;
-        this.userIsBanned = userIsBanned;
-        this.userThreadsNum = userThreadsNum;
-        this.userCommentsNum = userCommentsNum;
-        this.userComments = userComments;
-        this.userThreads = userThreads;
-    }
 
-    public User()
-    {
 
-    }
+
+
+
+
+
+
+
 
     public Long getId() {
         return id;
@@ -57,11 +64,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public Date getUserRegistrationDate() {
@@ -70,14 +77,6 @@ public class User {
 
     public void setUserRegistrationDate(Date userRegistrationDate) {
         this.userRegistrationDate = userRegistrationDate;
-    }
-
-    public boolean isUserIsBanned() {
-        return userIsBanned;
-    }
-
-    public void setUserIsBanned(boolean userIsBanned) {
-        this.userIsBanned = userIsBanned;
     }
 
     public Long getUserThreadsNum() {
@@ -118,5 +117,43 @@ public class User {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }

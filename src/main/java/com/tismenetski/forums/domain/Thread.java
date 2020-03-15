@@ -13,7 +13,7 @@ public class Thread {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String threadText;
-    private Long  threadCreatedById;
+    //private Long  threadCreatedById;
     private Boolean threadIsOpened;
     private Long threadCommentsNum;
     private Long threadWatchedNum;
@@ -28,9 +28,9 @@ public class Thread {
     private User user;
 
 
-    public Thread(String threadText, Long threadCreatedById, Boolean threadIsOpened, Long threadCommentsNum, Long threadWatchedNum, List<Comment> threadComments, User user) {
+    public Thread(String threadText, /*Long threadCreatedById,*/ Boolean threadIsOpened, Long threadCommentsNum, Long threadWatchedNum, List<Comment> threadComments, User user) {
         this.threadText = threadText;
-        this.threadCreatedById = threadCreatedById;
+        //this.threadCreatedById = threadCreatedById;
         this.threadIsOpened = threadIsOpened;
         this.threadCommentsNum = threadCommentsNum;
         this.threadWatchedNum = threadWatchedNum;
@@ -59,7 +59,7 @@ public class Thread {
     public void setThreadText(String threadText) {
         this.threadText = threadText;
     }
-
+/*
     public Long getThreadCreatedById() {
         return threadCreatedById;
     }
@@ -67,7 +67,7 @@ public class Thread {
     public void setThreadCreatedById(Long threadCreatedById) {
         this.threadCreatedById = threadCreatedById;
     }
-
+*/
     public Boolean getThreadIsOpened() {
         return threadIsOpened;
     }
