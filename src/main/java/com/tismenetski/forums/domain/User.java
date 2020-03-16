@@ -22,10 +22,10 @@ public class User implements UserDetails {
     private String username;
 
     @Column(name="email",nullable = false ,unique = true)
-    private String userEmail;
+    private String email;
 
     @Column(name="password",nullable = false)
-    private String userPassword;
+    private String password;
 
     private Date userRegistrationDate;
     private Long userThreadsNum;
@@ -63,12 +63,9 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getUserName() {
+    @Override
+    public String getUsername() {
         return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
     }
 
     public Date getUserRegistrationDate() {
@@ -111,12 +108,32 @@ public class User implements UserDetails {
         this.userThreads = userThreads;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override
@@ -126,15 +143,9 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    @Override
-    public String getPassword() {
-        return null;
-    }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
+
+
 
     @Override
     public boolean isAccountNonExpired() {

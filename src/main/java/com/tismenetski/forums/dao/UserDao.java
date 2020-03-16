@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserDao extends CrudRepository<User,Long> {
     User findByUsername(String username);//Spring will automatically know to bind findBy to what string is attached to it
+    User findByEmail(String email);
 }
