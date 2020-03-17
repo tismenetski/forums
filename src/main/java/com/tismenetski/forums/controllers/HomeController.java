@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,6 +68,14 @@ public class HomeController {
 
             return "redirect:/";
         }
+    }
+
+    @RequestMapping("/forumsHome")
+    public String forumsHome(Principal principal,Model model)
+    {
+        User user = userService.findByUsername(principal.getName());
+
+        return "forumsHome";
     }
 
 

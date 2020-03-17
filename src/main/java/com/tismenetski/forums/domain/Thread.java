@@ -27,22 +27,17 @@ public class Thread {
     @JoinColumn(name="user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name="forum_id")
+    private Forum forum;
 
-    public Thread(String threadText, /*Long threadCreatedById,*/ Boolean threadIsOpened, Long threadCommentsNum, Long threadWatchedNum, List<Comment> threadComments, User user) {
-        this.threadText = threadText;
-        //this.threadCreatedById = threadCreatedById;
-        this.threadIsOpened = threadIsOpened;
-        this.threadCommentsNum = threadCommentsNum;
-        this.threadWatchedNum = threadWatchedNum;
-        this.threadComments = threadComments;
-        this.user = user;
+    public Forum getForum() {
+        return forum;
     }
 
-    public Thread()
-    {
-
+    public void setForum(Forum forum) {
+        this.forum = forum;
     }
-
 
     public Long getId() {
         return id;

@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http  //This code checks if the user login was successful ,if it's not he hill be redirected to home page with the error and if he logged in then he will have permissions
                 .csrf().disable().cors().disable()
-                .formLogin().failureUrl("/index?error").defaultSuccessUrl("/userFront").
+                .formLogin().failureUrl("/index?error").defaultSuccessUrl("/forumsHome").
                 loginPage("/index").permitAll()
                 .and()
                 //handles the logout process

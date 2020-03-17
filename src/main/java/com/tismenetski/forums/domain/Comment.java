@@ -10,8 +10,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String commentText;
-    //private Long  commentCreatedById;
-    //private Long commentThreadId;
 
     @ManyToOne
     @JoinColumn(name="thread_id")
@@ -21,19 +19,6 @@ public class Comment {
     @JoinColumn(name="user_id")
     private User user;
 
-
-    public Comment()
-    {
-
-    }
-
-    public Comment(String commentText/*, Long commentCreatedById, Long commentThreadId*/) {
-        this.commentText = commentText;
-        /*
-        this.commentCreatedById = commentCreatedById;
-        this.commentThreadId = commentThreadId;
-        */
-    }
 
     public Long getId() {
         return id;
@@ -51,22 +36,4 @@ public class Comment {
         this.commentText = commentText;
     }
 
-
-    /*
-    public Long getCommentCreatedById() {
-        return commentCreatedById;
-    }
-
-    public void setCommentCreatedById(Long commentCreatedById) {
-        this.commentCreatedById = commentCreatedById;
-    }
-
-    public Long getCommentThreadId() {
-        return commentThreadId;
-    }
-
-    public void setCommentThreadId(Long commentThreadId) {
-        this.commentThreadId = commentThreadId;
-    }
-    */
 }
