@@ -1,8 +1,10 @@
 package com.tismenetski.forums.controllers;
 
 import com.tismenetski.forums.dao.RoleDao;
+import com.tismenetski.forums.domain.Category;
 import com.tismenetski.forums.domain.User;
 import com.tismenetski.forums.domain.security.UserRole;
+import com.tismenetski.forums.services.CategoryService;
 import com.tismenetski.forums.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private RoleDao roleDao;
@@ -74,6 +79,10 @@ public class HomeController {
     public String forumsHome(Principal principal,Model model)
     {
         User user = userService.findByUsername(principal.getName());
+        Set<Category> categories = categoryService.getCategories();
+        model.addAttribute("user",user);
+        model.addAttribute("categories",categories);
+
 
         return "forumsHome";
     }
