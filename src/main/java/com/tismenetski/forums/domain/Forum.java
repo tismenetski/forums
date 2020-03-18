@@ -12,6 +12,7 @@ public class Forum {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String description;
 
     @OneToMany(mappedBy = "forum",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
@@ -51,6 +52,14 @@ public class Forum {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

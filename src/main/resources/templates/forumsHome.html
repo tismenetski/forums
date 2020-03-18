@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=devide-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
 
     <title>Forum - Board Overview</title>
     <style type="text/css">
@@ -38,7 +38,7 @@
             <div th:each= "category : ${categories}">
             <h2 class="h4 text-white bg-info mb-0 p-4 rounded-top" th:text="${category.name}">Forum category</h2>
                 <!--/* <div>"${category.name}"</div>*/-->
-            <table class="table table-striped table-bordered table-responsive">
+            <table class="table table-striped table-bordered">
                 <thead class="thead-light">
                 <tr>
                     <th scope="col" class="forum-col">Forum</th>
@@ -50,11 +50,11 @@
                 <tbody>
                 <tr th:each="forum : ${category.forums}">
                     <td>
-                        <h3 class="h5 mb-0" ><a href="#0" class="text-uppercase"  th:text="${forum.name}" >Forum name</a></h3>
-                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.In laoreet pellentesque lorem sed elementum.</p>
+                        <h3 class="h5 mb-0" ><a href="#0" th:href="@{'/' + ${forum.id}+'/forumsForum'}" class="text-uppercase"  th:text="${forum.name}" >Forum name</a></h3>
+                        <p class="mb-0" th:text="${forum.description}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.In laoreet pellentesque lorem sed elementum.</p>
                     </td>
                     <td>
-                        <div>5</div>
+                        <div th:text="${forum.threads.size()}">5</div>
                     </td>
                     <td>
                         <div>18</div>
