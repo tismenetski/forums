@@ -2,6 +2,7 @@ package com.tismenetski.forums.domain;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Comment {
@@ -10,6 +11,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String commentText;
+    private Date commentDate;
 
     @ManyToOne
     @JoinColumn(name="thread_id")
@@ -36,4 +38,27 @@ public class Comment {
         this.commentText = commentText;
     }
 
+    public Date getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(Date commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

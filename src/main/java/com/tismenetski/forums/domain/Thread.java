@@ -4,6 +4,7 @@ package com.tismenetski.forums.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,10 +14,10 @@ public class Thread {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String threadText;
-    //private Long  threadCreatedById;
     private Boolean threadIsOpened;
     private Long threadCommentsNum;
     private Long threadWatchedNum;
+    private Date threadDate;
 
     @OneToMany(mappedBy = "thread",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
@@ -101,5 +102,13 @@ public class Thread {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getThreadDate() {
+        return threadDate;
+    }
+
+    public void setThreadDate(Date threadDate) {
+        this.threadDate = threadDate;
     }
 }

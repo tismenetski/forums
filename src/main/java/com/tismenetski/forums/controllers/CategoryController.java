@@ -28,7 +28,7 @@ public class CategoryController {
     @GetMapping("/{id}/forumsForum")
     public String showById(@PathVariable String id, Model model)
     {
-        model.addAttribute("recipe",forumService.findById(new Long(id)));
+        model.addAttribute("forum",forumService.findById(new Long(id)));
 
         return "forumsForum";
     }
