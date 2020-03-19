@@ -37,8 +37,12 @@ public class ThreadController {
     {
        System.out.println("TESTING");
        Thread thread = threadService.findById(new Long(id));
+       Forum forum=forumService.findById(new Long(id1));
        model.addAttribute("thread",thread);
+       model.addAttribute("forum",forum);
 
        return "forumThread";
     }
+
+
 }

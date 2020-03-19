@@ -27,7 +27,8 @@ public class ForumServiceImpl  implements ForumService {
     public Set<Forum> getForums()
     {
         Set<Forum> forumSet = new HashSet<>();
-        forumDao.findAll().iterator().forEachRemaining(forumSet::add);
+        //forumDao.findAll().iterator().forEachRemaining(forumSet::add);
+        forumSet=forumDao.findAllByOrderByIdAsc();
         return forumSet;
     }
 

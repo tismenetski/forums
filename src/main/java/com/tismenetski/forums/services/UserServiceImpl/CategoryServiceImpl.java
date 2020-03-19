@@ -4,6 +4,7 @@ import com.tismenetski.forums.dao.CategoryDao;
 import com.tismenetski.forums.domain.Category;
 import com.tismenetski.forums.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -24,7 +25,10 @@ public class CategoryServiceImpl implements CategoryService {
     public Set<Category> getCategories()
     {
         Set<Category> categorySet = new HashSet<>();
-        categoryDao.findAll().iterator().forEachRemaining(categorySet::add);
+
+        //categoryDao.findAll().iterator().forEachRemaining(categorySet::add);
+        categorySet=categoryDao.findAllByOrderByIdAsc();
+        //categoryDao.findAll(Sort.by("colName").descending())
         return categorySet;
     }
 
