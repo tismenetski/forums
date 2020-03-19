@@ -55,7 +55,7 @@
                  <div th:each=" thread : ${forum.threads}">
                      <tr>
                          <td>
-                             <h3 class="h6"><a href="#0" th:text="${thread.threadText}">Forum post title with a complex and long question</a></h3>
+                             <h3 class="h6"><a href="#0" th:href="@{'/'+${forum.id}+'/forumsForum/forumsThread/'+${thread.id}}" th:text="${thread.threadText}">Forum post title with a complex and long question</a></h3>
                          </td>
                          <td>
                              <div>by <a href="#0" th:text="${thread.user.username}">Author name</a></div>

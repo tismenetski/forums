@@ -8,6 +8,7 @@ import com.tismenetski.forums.domain.Comment;
 import com.tismenetski.forums.domain.Thread;
 import com.tismenetski.forums.domain.Forum;
 import com.tismenetski.forums.domain.User;
+import com.tismenetski.forums.exceptions.NotFoundException;
 import com.tismenetski.forums.services.ForumService;
 import com.tismenetski.forums.services.ThreadService;
 import com.tismenetski.forums.services.UserService;
@@ -19,6 +20,7 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 
 @Service
@@ -45,29 +47,41 @@ public class ThreadServiceImpl implements ThreadService {
 
     @Override
     @Transactional
-    public Thread createThread(Forum forum , Principal principal,String comment, String threadText)
+    public Thread createThread(Forum forum , Principal principal,String commentText, String threadText)
     {
-        /*So the controller can reach the service since the sout below working*/
-        System.out.println("testing");
-
-
+        //Objects
         Thread thread = new Thread();
-        Comment comment1= new Comment(); //added
-        comment1.setCommentText(comment); //added
-        thread.setThreadText("Testing new Thread");
+        Comment comment= new Comment(); //added
         User user = userService.findByUsername(principal.getName());
+        Date date= Calendar.getInstance().getTime();
+
+        //Adding Values to objects
+        comment.setCommentText(commentText);
+        comment.setThread(thread);
+        comment.setUser(user);
+        comment.setCommentDate(date);
+        thread.setThreadText(threadText);
         thread.setUser(user);
         thread.setForum(forum);
-        //threadDao.save(thread);
-        forumDao.save(forum);
-        threadDao.save(thread); //added
-        commentDao.save(comment1); //added
+        thread.setThreadDate(date);
 
+        //Saving Dao
+        forumDao.save(forum);
+        threadDao.save(thread);
+        commentDao.save(comment);
 
         return thread;
-
-
-
     }
 
+    @Override
+    public Thread findById(Long l)
+    {
+        Optional<Thread> threadOptional= threadDao.findById(l);
+        if (!threadOptional.isPresent())
+        {
+            throw new NotFoundException("Recipe Not Found. For ID value: " +l.toString());
+        }
+
+        return threadOptional.get();
+    }
 }

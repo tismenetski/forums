@@ -7,5 +7,6 @@ import com.tismenetski.forums.domain.Thread;
 import java.security.Principal;
 
 public interface ThreadService {
-    Thread createThread(Forum forum , Principal principal,String comment, String threadText);
+    Thread createThread(Forum forum , Principal principal,String commentText, String threadText);
+    Thread findById(Long l);
 }
