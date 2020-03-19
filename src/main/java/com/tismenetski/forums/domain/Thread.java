@@ -32,6 +32,11 @@ public class Thread {
     @JoinColumn(name="forum_id")
     private Forum forum;
 
+    public Thread()
+    {
+
+    }
+
     public Forum getForum() {
         return forum;
     }
@@ -63,7 +68,10 @@ public class Thread {
     public void setThreadCreatedById(Long threadCreatedById) {
         this.threadCreatedById = threadCreatedById;
     }
+
+
 */
+
     public Boolean getThreadIsOpened() {
         return threadIsOpened;
     }
