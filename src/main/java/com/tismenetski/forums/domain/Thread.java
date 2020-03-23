@@ -19,7 +19,7 @@ public class Thread {
     private Long threadWatchedNum;
     private Date threadDate;
 
-    @OneToMany(mappedBy = "thread",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "thread",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     @JsonIgnore
     private List<Comment> threadComments;
 

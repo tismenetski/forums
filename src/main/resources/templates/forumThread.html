@@ -43,8 +43,8 @@
 <!--/*@thymesVar id="comment" type="com.tismenetski.forums.domain.Comment"*/-->
 <div class="container my-3">
     <nav class="breadcrumb">
-        <a href="#0" class="breadcrumb-item">Board index</a>
-        <a href="#0"  class="breadcrumb-item" th:text="${thread.forum.name}">Forum name</a>
+        <a href="#0" th:href="@{'/forumsHome'}" class="breadcrumb-item">Board index</a>
+        <a href="#0" th:href="@{'/' + ${forum.id}+'/forumsForum'}"  class="breadcrumb-item" th:text="${thread.forum.name}">Forum name</a>
         <span class="breadcrumb-item active" th:text="${thread.threadText}">Forum post with a complex and lonq question</span>
     </nav>
     <div class="row">
@@ -69,8 +69,8 @@
                 </tr>
                 <tr  th:each="comment : ${thread.threadComments}">
                     <td>
-                        <div><span class="font-weight-bold" th:text="${comment.user.userRegistrationDate}">Joined:</span><br> 03 Apr 2017,13:46</a></div>
-                        <div><span class="font-weight-bold" th:text="${comment.user.userCommentsNum}">Posts:</span><br>123</div>
+                        <div>Joined: <span class="font-weight-bold" th:text="${comment.user.userRegistrationDate}"></span><br></div>
+                        <div>Posts: <span class="font-weight-bold" th:text="${comment.user.userComments.size()}"></span><br></div>
                     </td>
                     <td>
                         <p th:text="${comment.commentText}">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
